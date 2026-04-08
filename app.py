@@ -28,7 +28,7 @@ section[data-testid="stSidebar"] * {
 
 /* HEADER */
 header[data-testid="stHeader"] {
-    background: #2b2b2b;
+    background: #e6e6e6;
 }
 header[data-testid="stHeader"] * {
     color: white !important;
