@@ -31,7 +31,7 @@ section[data-testid="stSidebar"] * {
 
 /* ===== HEADER ===== */
 header[data-testid="stHeader"] {
-    background: #262626;
+    background: #6C6A6C;
 }
 
 /* ===== KPI CARDS ===== */
