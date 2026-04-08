@@ -21,7 +21,7 @@ st.markdown("""
 
 /* ===== SIDEBAR (TONED DOWN DARK) ===== */
 section[data-testid="stSidebar"] {
-    background-color: #3C4142;   /* softer than black */
+    background-color: #202020;   /* softer than black */
 }
 
 /* Sidebar text */
