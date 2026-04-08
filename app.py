@@ -5,68 +5,69 @@ import pandas as pd
 import plotly.graph_objects as go
 
 # ================= CONFIG =================
-st.set_page_config(page_title="WeatherWise Pro", layout="wide")
-API_KEY = st.secrets["API_KEY"]
-
-# ================= GLOBAL STYLING =================
 st.markdown("""
 <style>
 
-/* ===== MAIN BACKGROUND ===== */
+/* ===== MAIN BACKGROUND (SOFT GREY) ===== */
 .stApp {
-    background-color: #f2f2f2;
-    color: #111111;
+    background-color: #e6e6e6;   /* darker than before */
+    color: #1a1a1a;
 }
 
-/* ===== SIDEBAR ===== */
+/* ===== SIDEBAR (TONED DOWN DARK) ===== */
 section[data-testid="stSidebar"] {
-    background-color: #1f1f1f;
+    background-color: #262626;   /* softer than black */
 }
 
+/* Sidebar text */
 section[data-testid="stSidebar"] * {
-    color: #ffffff !important;
+    color: #eaeaea !important;
 }
 
 /* ===== HEADER ===== */
 header[data-testid="stHeader"] {
-    background: #1f1f1f;
+    background: #262626;
 }
 
 /* ===== KPI CARDS ===== */
 .card {
     padding: 18px;
     border-radius: 14px;
-    background: #2c2c2c;
-    color: white;
-    box-shadow: 0px 4px 12px rgba(0,0,0,0.2);
+    background: #2f2f2f;
+    color: #ffffff;
+    box-shadow: 0px 4px 12px rgba(0,0,0,0.25);
     text-align: center;
 }
 
 /* ===== INPUTS ===== */
 input, textarea {
-    background-color: #2c2c2c !important;
-    color: white !important;
+    background-color: #2f2f2f !important;
+    color: #ffffff !important;
 }
 
-/* FIX placeholder visibility */
 ::placeholder {
     color: #bbbbbb !important;
 }
 
-/* ===== SELECT BOX (BETTER TARGETING) ===== */
+/* ===== SELECT ===== */
 div[data-baseweb="select"] > div {
-    background-color: #2c2c2c !important;
+    background-color: #2f2f2f !important;
     color: white !important;
 }
 
-/* ===== BUTTONS (SAFE TARGET) ===== */
+/* ===== BUTTONS ===== */
 div.stButton > button {
-    background-color: #333333;
+    background-color: #3a3a3a;
     color: white;
     border-radius: 8px;
 }
 
-/* ===== TABLE (SOFTER LOOK) ===== */
+/* ===== SLIDER ===== */
+div[data-testid="stSlider"] {
+    color: white;
+}
+
+/* ===== TABLE ===== */
 [data-testid="stDataFrame"] {
     border-radius: 10px;
     overflow: hidden;
