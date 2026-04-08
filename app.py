@@ -11,30 +11,67 @@ API_KEY = st.secrets["API_KEY"]
 # ================= GLOBAL STYLING =================
 st.markdown("""
 <style>
-/* DARK STORM BACKGROUND */
+
+/* ===== MAIN BACKGROUND ===== */
 .stApp {
-    background: linear-gradient(to right, #232526, #414345);
-    color: white;
+    background-color: #f2f2f2;
+    color: #111111;
 }
 
-/* HEADER */
+/* ===== SIDEBAR ===== */
+section[data-testid="stSidebar"] {
+    background-color: #1f1f1f;
+}
+
+section[data-testid="stSidebar"] * {
+    color: #ffffff !important;
+}
+
+/* ===== HEADER ===== */
 header[data-testid="stHeader"] {
-    background: rgba(0,0,0,0.85);
+    background: #1f1f1f;
 }
 
-/* KPI CARDS */
+/* ===== KPI CARDS ===== */
 .card {
-    padding:18px;
-    border-radius:14px;
-    background: rgba(0,0,0,0.4);
-    box-shadow: 0px 4px 15px rgba(0,0,0,0.3);
-    text-align:center;
+    padding: 18px;
+    border-radius: 14px;
+    background: #2c2c2c;
+    color: white;
+    box-shadow: 0px 4px 12px rgba(0,0,0,0.2);
+    text-align: center;
 }
 
-/* TEXT */
-h1, h2, h3, h4, h5, h6, p {
+/* ===== INPUTS ===== */
+input, textarea {
+    background-color: #2c2c2c !important;
     color: white !important;
 }
+
+/* FIX placeholder visibility */
+::placeholder {
+    color: #bbbbbb !important;
+}
+
+/* ===== SELECT BOX (BETTER TARGETING) ===== */
+div[data-baseweb="select"] > div {
+    background-color: #2c2c2c !important;
+    color: white !important;
+}
+
+/* ===== BUTTONS (SAFE TARGET) ===== */
+div.stButton > button {
+    background-color: #333333;
+    color: white;
+    border-radius: 8px;
+}
+
+/* ===== TABLE (SOFTER LOOK) ===== */
+[data-testid="stDataFrame"] {
+    border-radius: 10px;
+    overflow: hidden;
+}
+
 </style>
 """, unsafe_allow_html=True)
 
