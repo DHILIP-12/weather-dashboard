@@ -28,7 +28,7 @@ section[data-testid="stSidebar"] * {
 
 /* ===== HEADER FIX ===== */
 header[data-testid="stHeader"] {
-    background: #262626;
+    background: #2b2b2b;
 }
 
 /* FIX ICONS */
