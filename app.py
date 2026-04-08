@@ -5,7 +5,7 @@ import pandas as pd
 import plotly.graph_objects as go
 
 # ================= CONFIG =================
-API_KEY = 4F64DXD3PHWM6DHPPEN3TM9L2
+API_KEY = "4F64DXD3PHWM6DHPPEN3TM9L2"
 st.set_page_config(page_title="WeatherWise Pro", layout="wide")
 
 # ================= HEADER FIX =================
