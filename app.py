@@ -15,13 +15,13 @@ st.markdown("""
 
 /* ===== MAIN BACKGROUND (SOFT GREY) ===== */
 .stApp {
-    background-color: #6C6A6C;   /* darker than before */
+    background-color: #ABAB7D;   /* darker than before */
     color: #1a1a1a;
 }
 
 /* ===== SIDEBAR (TONED DOWN DARK) ===== */
 section[data-testid="stSidebar"] {
-    background-color: #202020;   /* softer than black */
+    background-color: #353F2A;   /* softer than black */
 }
 
 /* Sidebar text */
