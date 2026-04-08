@@ -8,17 +8,17 @@ import plotly.graph_objects as go
 st.set_page_config(page_title="WeatherWise Pro", layout="wide")
 API_KEY = st.secrets["API_KEY"]
 
-# ================= GLOBAL UI =================
+# ================= GLOBAL STYLING =================
 st.markdown("""
 <style>
 
-/* MAIN BACKGROUND */
+/* ===== MAIN BACKGROUND ===== */
 .stApp {
     background-color: #e6e6e6;
     color: #1a1a1a;
 }
 
-/* SIDEBAR */
+/* ===== SIDEBAR ===== */
 section[data-testid="stSidebar"] {
     background-color: #2b2b2b;
 }
@@ -26,16 +26,33 @@ section[data-testid="stSidebar"] * {
     color: #f1f1f1 !important;
 }
 
-/* HEADER */
+/* ===== HEADER FIX ===== */
 header[data-testid="stHeader"] {
-    background: #e6e6e6;
-}
-header[data-testid="stHeader"] * {
-    color: white !important;
-    fill: white !important;
+    background: #262626;
 }
 
-/* CARDS */
+/* FIX ICONS */
+header[data-testid="stHeader"] svg {
+    fill: #ffffff !important;
+}
+
+/* FIX BUTTON TEXT */
+header[data-testid="stHeader"] button {
+    color: #ffffff !important;
+    opacity: 1 !important;
+}
+
+/* FIX SHARE TEXT */
+header[data-testid="stHeader"] span {
+    color: #ffffff !important;
+}
+
+/* HOVER */
+header[data-testid="stHeader"] button:hover {
+    background-color: rgba(255,255,255,0.1);
+}
+
+/* ===== KPI CARDS ===== */
 .card {
     padding: 18px;
     border-radius: 14px;
@@ -45,30 +62,40 @@ header[data-testid="stHeader"] * {
     text-align: center;
 }
 
-/* INPUTS */
+/* ===== INPUTS ===== */
 input, textarea {
-    background-color: #3a3a3a !important;
+    background-color: #2f2f2f !important;
     color: white !important;
 }
 ::placeholder {
     color: #bbbbbb !important;
 }
 
-/* SELECT */
+/* ===== SELECT ===== */
 div[data-baseweb="select"] > div {
-    background-color: #3a3a3a !important;
+    background-color: #2f2f2f !important;
     color: white !important;
 }
 
-/* BUTTON */
+/* ===== BUTTONS ===== */
 div.stButton > button {
     background-color: #3a3a3a;
     color: white;
     border-radius: 8px;
 }
 
+/* ===== TABLE ===== */
+[data-testid="stDataFrame"] {
+    border-radius: 10px;
+    overflow: hidden;
+}
+
 </style>
 """, unsafe_allow_html=True)
+
+# ================= SESSION =================
+if "unit" not in st.session_state:
+    st.session_state.unit = "Celsius"
 
 # ================= UTILS =================
 def get_unit_group(unit):
@@ -92,14 +119,13 @@ def fetch_weather(city, unit):
             "contentType": "json"
         }
 
-        res = requests.get(url, params=params, timeout=8)
+        res = requests.get(url, params=params, timeout=10)
 
         if res.status_code != 200:
             return None
 
         return res.json()
-
-    except Exception as e:
+    except:
         return None
 
 # ================= CITY SEARCH =================
@@ -120,17 +146,13 @@ def search_city(query):
         headers = {"User-Agent": "weatherwise-pro"}
 
         res = requests.get(url, params=params, headers=headers, timeout=5)
+        data = res.json() if res.status_code == 200 else []
 
-        if res.status_code != 200:
-            return []
-
-        data = res.json()
         return [place["display_name"] for place in data]
-
     except:
         return []
 
-# ================= KPI =================
+# ================= KPI CARD =================
 def kpi_card(title, value, icon):
     st.markdown(f"""
     <div class="card">
@@ -149,6 +171,7 @@ if results:
     selected = st.sidebar.selectbox("Select Location", results)
     city = selected.split(",")[0]
 else:
+    st.sidebar.warning("⚠ No results found")
     city = query
 
 days = st.sidebar.slider("Forecast Days", 1, 10, 7)
@@ -180,10 +203,13 @@ col1, col2, col3, col4 = st.columns(4)
 
 with col1:
     kpi_card("Feels Like", f"{current['feelslike']}{symbol}", "🥵")
+
 with col2:
     kpi_card("Humidity", f"{current['humidity']}%", "💧")
+
 with col3:
     kpi_card("Wind", f"{current['windspeed']} {w_unit}", "🌬")
+
 with col4:
     kpi_card("Pressure", f"{current.get('pressure','N/A')}", "🌪")
 
@@ -231,6 +257,7 @@ with tab4:
 # ================= FOOTER =================
 st.caption("Data Source: Visual Crossing API")
 
-# ================= LIVE =================
+# ================= LIVE MODE =================
 if live_mode:
+    st.info("🔴 Refreshing...")
     st.experimental_rerun()
