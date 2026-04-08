@@ -110,19 +110,19 @@ def kpi_card(title, value, icon):
     </div>
     """, unsafe_allow_html=True)
 
+
 def set_background(condition):
     if "rain" in condition.lower():
-        bg = "linear-gradient(to right, #373B44, #4286f4)"
+        bg = "#2c3e50"
     elif "cloud" in condition.lower():
-        bg = "linear-gradient(to right, #757F9A, #D7DDE8)"
+        bg = "#34495e"
     else:
-        bg = "linear-gradient(to right, #1e3c72, #2a5298)"
+        return  # ← IMPORTANT: do nothing for clear weather
 
     st.markdown(f"""
     <style>
     .stApp {{
-        background: {bg};
-        color: white;
+        background-color: {bg};
     }}
     </style>
     """, unsafe_allow_html=True)
@@ -158,7 +158,7 @@ if not data or "currentConditions" not in data:
 
 # ================= BACKGROUND =================
 condition = data["currentConditions"]["conditions"]
-set_background(condition)
+
 
 # ================= MAIN =================
 st.title("🌦 WeatherWise Pro")
