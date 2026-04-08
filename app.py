@@ -4,6 +4,11 @@ import requests
 import pandas as pd
 import plotly.graph_objects as go
 
+st.set_page_config(page_title="WeatherWise Pro", layout="wide")
+
+API_KEY = st.secrets["API_KEY"]
+
+
 # ================= CONFIG =================
 st.markdown("""
 <style>
@@ -94,7 +99,7 @@ def wind_unit(unit):
 @st.cache_data(ttl=600)
 def fetch_weather(city, unit):
     try:
-        url = f"https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/{city}"
+        url = f"https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/{city},IN"
 
         params = {
             "unitGroup": get_unit_group(unit),
@@ -103,9 +108,17 @@ def fetch_weather(city, unit):
         }
 
         res = requests.get(url, params=params, timeout=8)
-        return res.json() if res.status_code == 200 else None
-    except:
+
+        if res.status_code != 200:
+            st.error(f"API Error: {res.status_code}")
+            return None
+
+        return res.json()
+
+    except Exception as e:
+        st.error(f"Error: {e}")
         return None
+
 
 # ================= CITY SEARCH =================
 @st.cache_data(ttl=86400)
